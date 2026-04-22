@@ -1,0 +1,22 @@
+# dependencies
+node_modules/
+
+# Next.js
+.next/
+out/
+
+# production
+build/
+
+# local env
+.env*.local
+
+# logs
+*.log
+
+# temporary copied source assets
+portrait-source.png
+
+# OS
+.DS_Store
+Thumbs.db
