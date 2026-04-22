@@ -20,3 +20,5 @@ portrait-source.png
 # OS
 .DS_Store
 Thumbs.db
+
+.vercel
