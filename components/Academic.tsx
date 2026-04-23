@@ -1,23 +1,30 @@
-import { academicExperience } from "@/lib/content";
-import { Reveal } from "@/components/Reveal";
+import { getPortfolioContent, type Locale } from "@/lib/content";
+import { Stagger, StaggerItem } from "@/components/Reveal";
 import { SectionHeader } from "@/components/SectionHeader";
 
-export function Academic() {
+type AcademicProps = {
+  locale: Locale;
+};
+
+export function Academic({ locale }: AcademicProps) {
+  const content = getPortfolioContent(locale);
+  const { academic } = content;
+
   return (
     <section id="academic" className="section-shell bg-paper px-5 py-24 md:px-8 md:py-32">
       <div className="mx-auto max-w-7xl">
         <SectionHeader
-          index="02"
-          label="Academic Experience"
-          title="A structured academic path with measurable performance."
-          description="The academic section is deliberately factual, drawn from the uploaded resume and organized for quick international scanning."
+          index={academic.header.index}
+          label={academic.header.label}
+          title={academic.header.title}
+          description={academic.header.description}
         />
 
-        <div className="mt-16 grid gap-5">
-          {academicExperience.map((item, index) => {
+        <Stagger className="mt-16 grid gap-5">
+          {academic.experience.map((item) => {
             const Icon = item.icon;
             return (
-              <Reveal key={item.institution} delay={index * 0.08}>
+              <StaggerItem key={item.institution}>
                 <article className="premium-card grid gap-6 rounded-md p-6 md:grid-cols-[0.26fr_0.74fr] md:p-8">
                   <div>
                     <div className="flex h-12 w-12 items-center justify-center rounded-md bg-ink text-white">
@@ -42,10 +49,10 @@ export function Academic() {
                     </ul>
                   </div>
                 </article>
-              </Reveal>
+              </StaggerItem>
             );
           })}
-        </div>
+        </Stagger>
       </div>
     </section>
   );

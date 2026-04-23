@@ -3,14 +3,23 @@ import "./globals.css";
 
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000"),
-  title: "Adam Shao | 邵剑波",
+  title: {
+    default: "邵剑波 | 双语作品集",
+    template: "%s"
+  },
   description:
-    "Personal brand portfolio for Adam Shao, an undergraduate student focused on data-driven research and Large Language Models.",
+    "邵剑波的双语个人网站：中文主页面向 AI 产品与数据分析实习申请，英文页面面向研究与研究生申请。",
   authors: [{ name: "Adam Shao" }],
+  alternates: {
+    languages: {
+      "zh-CN": "/",
+      en: "/en"
+    }
+  },
   openGraph: {
-    title: "Adam Shao | 邵剑波",
+    title: "邵剑波 | Adam Shao",
     description:
-      "Building at the intersection of research, data, and Large Language Models.",
+      "Bilingual portfolio for AI product and data analysis internships plus a graduate-school oriented academic profile.",
     type: "website",
     images: ["/images/adam-shao-portrait.png"]
   }
@@ -28,7 +37,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="zh-CN">
       <body>{children}</body>
     </html>
   );

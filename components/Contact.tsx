@@ -1,36 +1,42 @@
 import { ArrowRight } from "lucide-react";
-import { contactItems, personal } from "@/lib/content";
+import { getPortfolioContent, type Locale } from "@/lib/content";
 import { Reveal } from "@/components/Reveal";
 import { SectionHeader } from "@/components/SectionHeader";
 
-export function Contact() {
+type ContactProps = {
+  locale: Locale;
+};
+
+export function Contact({ locale }: ContactProps) {
+  const content = getPortfolioContent(locale);
+  const { contact, personal } = content;
+
   return (
     <section id="contact" className="section-shell bg-paper px-5 py-24 md:px-8 md:py-32">
       <div className="mx-auto max-w-7xl">
         <SectionHeader
-          index="07"
-          label="Contact"
-          title="Open to academic, research, and project conversations."
-          description="A minimal contact module keeps the profile direct and professional while leaving room for future links such as GitHub or a lab profile."
+          index={contact.header.index}
+          label={contact.header.label}
+          title={contact.header.title}
+          description={contact.header.description}
         />
 
         <div className="mt-16 grid gap-6 lg:grid-cols-[0.9fr_1.1fr]">
           <Reveal className="rounded-md border border-line bg-ink p-8 text-white md:p-10">
-            <h3 className="text-4xl font-semibold md:text-6xl">Let&apos;s connect.</h3>
+            <h3 className="text-4xl font-semibold md:text-6xl">{contact.title}</h3>
             <p className="mt-6 max-w-md text-lg leading-8 text-white/72">
-              For research discussions, academic opportunities, data projects,
-              or collaboration inquiries, email is the best first contact.
+              {contact.description}
             </p>
             <a
               href={`mailto:${personal.email}`}
               className="button-quiet mt-9 inline-flex items-center gap-2 rounded-md bg-white px-6 py-4 text-sm font-semibold text-ink"
             >
-              Email Adam <ArrowRight size={17} />
+              {contact.buttonLabel} <ArrowRight size={17} />
             </a>
           </Reveal>
 
           <div className="grid gap-4">
-            {contactItems.map((item, index) => {
+            {contact.items.map((item, index) => {
               const Icon = item.icon;
               const content = (
                 <div className="premium-card rounded-md p-6 md:p-7">

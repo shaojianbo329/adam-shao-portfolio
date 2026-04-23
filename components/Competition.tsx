@@ -1,25 +1,31 @@
-import { competitions } from "@/lib/content";
-import { Reveal } from "@/components/Reveal";
+import { getPortfolioContent, type Locale } from "@/lib/content";
+import { Stagger, StaggerItem } from "@/components/Reveal";
 import { SectionHeader } from "@/components/SectionHeader";
 
-export function Competition() {
+type CompetitionProps = {
+  locale: Locale;
+};
+
+export function Competition({ locale }: CompetitionProps) {
+  const content = getPortfolioContent(locale);
+  const { competition } = content;
+
   return (
     <section id="competition" className="section-shell bg-white px-5 py-24 md:px-8 md:py-32">
       <div className="mx-auto max-w-7xl">
         <SectionHeader
-          index="03"
-          label="Competition Experience"
-          title="Evidence of analytical ability and disciplined initiative."
-          description="Competition experience is presented as signal: quantitative strength, communication ability, and readiness to perform in structured settings."
+          index={competition.header.index}
+          label={competition.header.label}
+          title={competition.header.title}
+          description={competition.header.description}
         />
 
-        <div className="mt-16 grid gap-5 md:grid-cols-2">
-          {competitions.map((item, index) => {
+        <Stagger className="mt-16 grid gap-5 md:grid-cols-2">
+          {competition.items.map((item) => {
             const Icon = item.icon;
             return (
-              <Reveal
+              <StaggerItem
                 key={item.title}
-                delay={index * 0.1}
                 className="premium-card rounded-md p-7 md:p-8"
               >
                 <div className="flex items-start justify-between gap-6">
@@ -35,10 +41,10 @@ export function Competition() {
                 <p className="mt-5 text-base leading-7 text-steel">
                   {item.description}
                 </p>
-              </Reveal>
+              </StaggerItem>
             );
           })}
-        </div>
+        </Stagger>
       </div>
     </section>
   );

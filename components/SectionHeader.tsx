@@ -1,4 +1,4 @@
-import { Reveal } from "@/components/Reveal";
+import { Stagger, StaggerItem } from "@/components/Reveal";
 
 type SectionHeaderProps = {
   index: string;
@@ -18,8 +18,8 @@ export function SectionHeader({
   const isDark = tone === "dark";
 
   return (
-    <Reveal className="grid gap-8 md:grid-cols-[0.36fr_1fr] md:items-end">
-      <div
+    <Stagger className="grid gap-8 md:grid-cols-[0.36fr_1fr] md:items-end">
+      <StaggerItem
         className={`flex items-center gap-4 text-sm ${isDark ? "text-white/58" : "text-steel"}`}
       >
         <span className={`font-medium ${isDark ? "text-white" : "text-ink"}`}>
@@ -27,21 +27,25 @@ export function SectionHeader({
         </span>
         <span className={`h-px w-12 ${isDark ? "bg-white/24" : "bg-line"}`} />
         <span>{label}</span>
-      </div>
+      </StaggerItem>
       <div className="max-w-4xl">
-        <h2
-          className={`text-4xl font-semibold leading-[1.05] md:text-6xl ${isDark ? "text-white" : "text-ink"}`}
-        >
-          {title}
-        </h2>
-        {description ? (
-          <p
-            className={`mt-5 max-w-2xl text-base leading-8 md:text-lg ${isDark ? "text-white/68" : "text-steel"}`}
+        <StaggerItem>
+          <h2
+            className={`text-4xl font-semibold leading-[1.05] md:text-6xl ${isDark ? "text-white" : "text-ink"}`}
           >
-            {description}
-          </p>
+            {title}
+          </h2>
+        </StaggerItem>
+        {description ? (
+          <StaggerItem y={14}>
+            <p
+              className={`mt-5 max-w-2xl text-base leading-8 md:text-lg ${isDark ? "text-white/68" : "text-steel"}`}
+            >
+              {description}
+            </p>
+          </StaggerItem>
         ) : null}
       </div>
-    </Reveal>
+    </Stagger>
   );
 }
